@@ -7,7 +7,10 @@ A small two-layer toolkit that automates routine Kali Linux maintenance: system 
 ## Architecture
 
 - `security.c` — C launcher (the menu)
+- `secauto`
 - `Makefile` — build + install
+- `setup.sh`
+- `README.md`
 - `automation/`
   - `secauto.py` — dispatcher (update | scan | logs | all)
   - `common.py` — logging, sudo handling, subprocess runner
