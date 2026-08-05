@@ -1,0 +1,14 @@
+[Unit]
+Description=secauto automated APT update
+Documentation=https://www.kali.org/docs/general-use/updating-kali/
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+User=root
+# Adjust the path if you installed somewhere other than /opt/secauto.
+ExecStart=/usr/bin/python3 /opt/secauto/automation/secauto.py update
+# Hardening: this unit only needs to run apt as root.
+ProtectHome=read-only
+NoNewPrivileges=false

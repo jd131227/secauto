@@ -1,0 +1,16 @@
+[Unit]
+Description=Run secauto update every 7 hours
+
+[Timer]
+# First run 10 min after boot, then every 7 hours after each activation.
+# OnUnitActiveSec is a true fixed interval (unlike OnCalendar=*:0/7, which
+# would wrap at midnight and leave a short final gap).
+OnBootSec=10min
+OnUnitActiveSec=7h
+# Jitter up to 10 min so many machines don't all hit the mirror at once.
+RandomizedDelaySec=10min
+# Catch up with a run if the machine was asleep/off past a scheduled time.
+Persistent=true
+
+[Install]
+WantedBy=timers.target
