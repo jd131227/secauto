@@ -3,18 +3,20 @@
 A small two-layer toolkit that automates routine Kali Linux maintenance: system updates, a local security audit, and log management, with optional scheduled execution via systemd.
 
 ## Architecture
-kali-update-automation/
-├── security.c # C launcher (the menu)
-├── Makefile # build + install
-├── automation/
-│ ├── secauto.py # dispatcher (update | scan | logs | all)
-│ ├── common.py # logging, sudo handling, subprocess runner
-│ ├── update.py # apt update/full-upgrade/autoremove/autoclean
-│ ├── scan.py # read-only local security audit
-│ └── logs.py # list / tail / prune logs
-└── systemd/
-├── secauto-update.service
-└── secauto-update.timer
+
+## Architecture
+
+- `security.c` — C launcher (the menu)
+- `Makefile` — build + install
+- `automation/`
+  - `secauto.py` — dispatcher (update | scan | logs | all)
+  - `common.py` — logging, sudo handling, subprocess runner
+  - `update.py` — apt update/full-upgrade/autoremove/autoclean
+  - `scan.py` — read-only local security audit
+  - `logs.py` — list / tail / prune logs
+- `systemd/`
+  - `secauto-update.service`
+  - `secauto-update.timer`
 
 The C program is a thin launcher — it never runs `apt` itself. It resolves its own location via `/proc/self/exe`, finds `automation/secauto.py` next to it, and dispatches to Python, which owns all the actual policy and logic (easier to extend and test than doing it in C).
 
